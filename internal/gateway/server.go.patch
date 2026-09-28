@@ -1,0 +1,23 @@
+--- internal/gateway/server.go
++++ internal/gateway/server.go
+@@ -37,6 +37,12 @@
+ 
+ 	http.HandleFunc("/v1/chat/completions", s.handleChatCompletions)
++	http.HandleFunc("/v1/responses", s.handleChatCompletions)
++	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
++		fmt.Printf("UNHANDLED URL: %s\n", r.URL.Path)
++		s.handleChatCompletions(w, r)
++	})
+ 
+ 	return http.ListenAndServe(":"+s.cfg.Port, nil)
+ }
+@@ -47,6 +53,9 @@
+ 		return
+ 	}
+ 
++	bodyBytes, _ := io.ReadAll(r.Body)
++	r.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
++	fmt.Printf("Received request to %s: %s\n", r.URL.Path, string(bodyBytes))
++
+ 	var oReq OpenAIRequest
+ 	if err := json.NewDecoder(r.Body).Decode(&oReq); err != nil {

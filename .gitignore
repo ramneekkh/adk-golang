@@ -1,0 +1,21 @@
+# Binaries & build artifacts
+/.bin/
+/gateway
+/cost_report
+*.test
+/conformance.test
+
+# Logs & PIDs
+*.log
+*.pid
+
+# Runtime artifacts & traces
+/.out/
+/.agents/
+/eval/out/gateway_audit.jsonl
+/eval/out/*.json
+
+# Scratch & OS files
+.DS_Store
+*.swp
+*~

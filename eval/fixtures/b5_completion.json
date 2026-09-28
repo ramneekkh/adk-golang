@@ -1,0 +1,143 @@
+{
+  "stage": "B5",
+  "description": "Completion evaluation with retrieval blame removed: golden corpus chunks are injected as the SearchBankingDocs tool result and the rag agent writes the answer in one call. correctness = required facts present (any synonym per group); groundedness = every number in the answer appears in the chunks or the question; no_forbidden = no listed hallucination.",
+  "cases": [
+    {
+      "id": "b5-01",
+      "user_message": "เปิดบัญชีที่สาขาต้องใช้เอกสารอะไรบ้างคะ",
+      "injected_chunk_ids": [
+        "doc1"
+      ],
+      "required_facts": [
+        [
+          "บัตรประจำตัวประชาชน",
+          "บัตรประชาชน"
+        ]
+      ],
+      "forbidden_hallucinations": [
+        "ใบขับขี่",
+        "หนังสือเดินทาง",
+        "พาสปอร์ต"
+      ]
+    },
+    {
+      "id": "b5-02",
+      "user_message": "บัตรเดบิตมีค่าธรรมเนียมรายปีเท่าไหร่",
+      "injected_chunk_ids": [
+        "doc27"
+      ],
+      "required_facts": [
+        [
+          "200"
+        ]
+      ],
+      "forbidden_hallucinations": []
+    },
+    {
+      "id": "b5-03",
+      "user_message": "ฝากประจำ 12 เดือนดอกเบี้ยเท่าไหร่ ต้องฝากขั้นต่ำเท่าไหร่",
+      "injected_chunk_ids": [
+        "doc19"
+      ],
+      "required_facts": [
+        [
+          "2.0%",
+          "2%",
+          "2.0 %"
+        ],
+        [
+          "1,000",
+          "1000"
+        ]
+      ],
+      "forbidden_hallucinations": []
+    },
+    {
+      "id": "b5-04",
+      "user_message": "สมัครบัตรเครดิตต้องมีคุณสมบัติอะไรบ้าง",
+      "injected_chunk_ids": [
+        "doc8"
+      ],
+      "required_facts": [
+        [
+          "15,000",
+          "15000"
+        ],
+        [
+          "6 เดือน"
+        ]
+      ],
+      "forbidden_hallucinations": [
+        "อายุ 20"
+      ]
+    },
+    {
+      "id": "b5-05",
+      "user_message": "โอนเงินไปต่างประเทศผ่านแอปเสียค่าธรรมเนียมเท่าไหร่",
+      "injected_chunk_ids": [
+        "doc29"
+      ],
+      "required_facts": [
+        [
+          "150"
+        ]
+      ],
+      "forbidden_hallucinations": []
+    },
+    {
+      "id": "b5-06",
+      "user_message": "ขอสินเชื่อ SME ใช้เวลาพิจารณานานไหม",
+      "injected_chunk_ids": [
+        "doc31"
+      ],
+      "required_facts": [
+        [
+          "7-14",
+          "7 - 14",
+          "7 ถึง 14",
+          "7–14"
+        ]
+      ],
+      "forbidden_hallucinations": []
+    },
+    {
+      "id": "b5-07",
+      "user_message": "บัตร ATM หายทำยังไงดี",
+      "injected_chunk_ids": [
+        "doc16"
+      ],
+      "required_facts": [
+        [
+          "อายัด"
+        ],
+        [
+          "แอป"
+        ]
+      ],
+      "forbidden_hallucinations": [
+        "ค่าธรรมเนียม"
+      ]
+    },
+    {
+      "id": "b5-08",
+      "user_message": "บัญชีออมทรัพย์ได้ดอกเบี้ยเท่าไหร่ เปิดขั้นต่ำเท่าไหร่",
+      "injected_chunk_ids": [
+        "doc3"
+      ],
+      "required_facts": [
+        [
+          "0.5"
+        ],
+        [
+          "500"
+        ]
+      ],
+      "forbidden_hallucinations": []
+    }
+  ],
+  "thresholds": {
+    "correctness": 0.85,
+    "groundedness": 0.9,
+    "no_forbidden": 0.95
+  }
+}

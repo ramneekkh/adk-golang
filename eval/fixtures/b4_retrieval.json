@@ -1,0 +1,138 @@
+{
+  "stage": "B4",
+  "description": "Retrieval golden set over the 37-document policy corpus (rag.Corpus). Golden ids are real corpus ids. Measures recall@k, hit-rate@k and MRR of the production Retriever with the configured embedder.",
+  "cases": [
+    {
+      "id": "b4-01",
+      "query": "เปิดบัญชีที่สาขาต้องใช้เอกสารอะไรบ้างคะ",
+      "golden_chunk_ids": [
+        "doc1"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-02",
+      "query": "ค่าธรรมเนียมโอนเงินต่างธนาคาร",
+      "golden_chunk_ids": [
+        "doc5"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-03",
+      "query": "บัตรเอทีเอ็มหายต้องทำอย่างไร",
+      "golden_chunk_ids": [
+        "doc16"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-04",
+      "query": "บัตรเดบิตเสียค่าธรรมเนียมรายปีเท่าไหร่",
+      "golden_chunk_ids": [
+        "doc27"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-05",
+      "query": "ลืมรหัสผ่านเข้าแอปทำยังไงดี",
+      "golden_chunk_ids": [
+        "doc13"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-06",
+      "query": "สมุดบัญชีหายต้องทำอย่างไร",
+      "golden_chunk_ids": [
+        "doc15"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-07",
+      "query": "ฝากประจำ 12 เดือนได้ดอกเบี้ยเท่าไหร่",
+      "golden_chunk_ids": [
+        "doc19"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-08",
+      "query": "สมัครบัตรเครดิตต้องมีรายได้ขั้นต่ำเท่าไหร่",
+      "golden_chunk_ids": [
+        "doc8"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-09",
+      "query": "โอนเงินไปต่างประเทศค่าธรรมเนียมเท่าไหร่",
+      "golden_chunk_ids": [
+        "doc29"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-10",
+      "query": "เปิดบัญชีในนามบริษัทต้องใช้เอกสารอะไร",
+      "golden_chunk_ids": [
+        "doc11"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-11",
+      "query": "ผูกพร้อมเพย์กับเบอร์โทรได้ไหม",
+      "golden_chunk_ids": [
+        "doc33"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-12",
+      "query": "ขอสินเชื่อ SME ใช้เวลาพิจารณากี่วัน",
+      "golden_chunk_ids": [
+        "doc31"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-13",
+      "query": "ยื่นกู้ซื้อบ้านต้องเตรียมเอกสารอะไรบ้าง",
+      "golden_chunk_ids": [
+        "doc7"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-14",
+      "query": "ต้องการยกเลิกบัตรเครดิต",
+      "golden_chunk_ids": [
+        "doc10"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-15",
+      "query": "บัญชีไม่เคลื่อนไหวนานโดนค่ารักษาบัญชีไหม",
+      "golden_chunk_ids": [
+        "doc28"
+      ],
+      "k": 3
+    },
+    {
+      "id": "b4-16",
+      "query": "อยากเปิดบัญชีร่วมกับภรรยา",
+      "golden_chunk_ids": [
+        "doc24"
+      ],
+      "k": 3
+    }
+  ],
+  "thresholds": {
+    "recall_at_k": 0.8,
+    "mrr": 0.65
+  }
+}

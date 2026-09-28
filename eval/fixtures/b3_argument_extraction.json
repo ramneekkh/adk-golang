@@ -1,0 +1,118 @@
+{
+  "stage": "B3",
+  "description": "Argument-extraction golden set for SaveLoanDetails and ExecuteTransfer. Covers Thai numerals-as-words (ห้าหมื่น, 2 แสน), partial slot fills, English, and dashed account formats. Account numbers are masked by the privacy plugin before the model sees them and restored host-side before scoring, exactly as in production; accounts are compared by digits.",
+  "cases": [
+    {
+      "id": "b3-loan-01",
+      "tool": "SaveLoanDetails",
+      "user_message": "อยากกู้เงิน 50,000 บาท ผ่อน 12 เดือน เงินเดือน 30,000 บาท",
+      "expected_arguments": {
+        "amount": 50000,
+        "tenure_months": 12,
+        "monthly_income": 30000
+      }
+    },
+    {
+      "id": "b3-loan-02",
+      "tool": "SaveLoanDetails",
+      "user_message": "ขอกู้ 100,000 บาท 24 งวด",
+      "expected_arguments": {
+        "amount": 100000,
+        "tenure_months": 24
+      }
+    },
+    {
+      "id": "b3-loan-03",
+      "tool": "SaveLoanDetails",
+      "user_message": "เงินเดือนผม 45,000 บาทครับ",
+      "expected_arguments": {
+        "monthly_income": 45000
+      }
+    },
+    {
+      "id": "b3-loan-04",
+      "tool": "SaveLoanDetails",
+      "user_message": "อยากกู้ 2 แสนบาทค่ะ",
+      "expected_arguments": {
+        "amount": 200000
+      }
+    },
+    {
+      "id": "b3-loan-05",
+      "tool": "SaveLoanDetails",
+      "user_message": "ผ่อน 36 เดือนได้ไหมคะ ยอดกู้ 150,000",
+      "expected_arguments": {
+        "amount": 150000,
+        "tenure_months": 36
+      }
+    },
+    {
+      "id": "b3-loan-06",
+      "tool": "SaveLoanDetails",
+      "user_message": "I want to borrow 80000 baht over 18 months, salary 25000",
+      "expected_arguments": {
+        "amount": 80000,
+        "tenure_months": 18,
+        "monthly_income": 25000
+      }
+    },
+    {
+      "id": "b3-loan-07",
+      "tool": "SaveLoanDetails",
+      "user_message": "กู้ห้าหมื่นบาท ผ่อนหกเดือน",
+      "expected_arguments": {
+        "amount": 50000,
+        "tenure_months": 6
+      }
+    },
+    {
+      "id": "b3-transfer-01",
+      "tool": "ExecuteTransfer",
+      "user_message": "โอนเงิน 500 บาท เลขบัญชี 023536333",
+      "expected_arguments": {
+        "amount": 500,
+        "account": "023536333"
+      }
+    },
+    {
+      "id": "b3-transfer-02",
+      "tool": "ExecuteTransfer",
+      "user_message": "โอน 1,200 เข้า 9876543210",
+      "expected_arguments": {
+        "amount": 1200,
+        "account": "9876543210"
+      }
+    },
+    {
+      "id": "b3-transfer-03",
+      "tool": "ExecuteTransfer",
+      "user_message": "ช่วยโอน 2,500 บาท ไปบัญชี 123-4-56789-0 หน่อยค่ะ",
+      "expected_arguments": {
+        "amount": 2500,
+        "account": "123-4-56789-0"
+      }
+    },
+    {
+      "id": "b3-transfer-04",
+      "tool": "ExecuteTransfer",
+      "user_message": "transfer 750 THB to account 4455667788",
+      "expected_arguments": {
+        "amount": 750,
+        "account": "4455667788"
+      }
+    },
+    {
+      "id": "b3-transfer-05",
+      "tool": "ExecuteTransfer",
+      "user_message": "โอนสามพันบาทเข้าบัญชี 112233445",
+      "expected_arguments": {
+        "amount": 3000,
+        "account": "112233445"
+      }
+    }
+  ],
+  "thresholds": {
+    "field_f1": 0.9,
+    "exact_match": 0.8
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "stage": "B6",
+  "description": "End-to-end cases through the full production runner. A case passes when the observed route, final-answer keywords (any synonym per group) and session-state expectations all hold. Transfer stops at the human approval gate by design.",
+  "cases": [
+    {
+      "id": "b6-01",
+      "user_message": "เปิดบัญชีที่สาขาต้องใช้เอกสารอะไรบ้างคะ",
+      "expected_route": "rag",
+      "expected_keywords": [
+        [
+          "บัตรประจำตัวประชาชน",
+          "บัตรประชาชน"
+        ]
+      ],
+      "expected_state": {
+        "rag.last_retrieved_ids": "doc1"
+      }
+    },
+    {
+      "id": "b6-02",
+      "user_message": "บัตรเดบิตค่าธรรมเนียมรายปีเท่าไหร่คะ",
+      "expected_route": "rag",
+      "expected_keywords": [
+        [
+          "200"
+        ]
+      ],
+      "expected_state": {
+        "rag.last_retrieved_ids": "doc27"
+      }
+    },
+    {
+      "id": "b6-03",
+      "user_message": "อยากกู้เงิน 50,000 บาท ผ่อน 12 เดือน เงินเดือน 30,000 บาท",
+      "expected_route": "loan",
+      "expected_keywords": [
+        [
+          "3.5"
+        ]
+      ],
+      "expected_state": {
+        "loan.result": "Approved"
+      }
+    },
+    {
+      "id": "b6-04",
+      "user_message": "อยากกู้ 300,000 บาท ผ่อน 12 เดือน เงินเดือน 15,000 บาท",
+      "expected_route": "loan",
+      "expected_keywords": [],
+      "expected_state": {
+        "loan.result": "Declined"
+      }
+    },
+    {
+      "id": "b6-05",
+      "user_message": "โอนเงิน 500 บาท เลขบัญชี 023536333",
+      "expected_route": "transfer",
+      "expected_keywords": [],
+      "expected_state": {
+        "transfer.status": "AWAITING_HUMAN_APPROVAL",
+        "transfer.pending": "023536333"
+      }
+    },
+    {
+      "id": "b6-06",
+      "user_message": "ตอนนี้พร้อมเพย์ใช้งานได้ปกติไหมคะ",
+      "expected_route": "status",
+      "expected_keywords": [
+        [
+          "ให้บริการตามปกติ"
+        ]
+      ],
+      "expected_state": {}
+    },
+    {
+      "id": "b6-07",
+      "user_message": "ช่วยสรุปข่าวการเมืองวันนี้ให้หน่อย",
+      "expected_route": "none",
+      "expected_keywords": [],
+      "expected_state": {}
+    },
+    {
+      "id": "b6-08",
+      "user_message": "เปิดบัญชีออนไลน์ได้ไหม ส่งรายละเอียดไปที่ somchai.k@example.co.th ด้วยนะคะ",
+      "expected_route": "rag",
+      "expected_keywords": [
+        [
+          "NDID",
+          "แอป"
+        ]
+      ],
+      "expected_state": {
+        "privacy.e1.findings": "EMAIL"
+      }
+    }
+  ],
+  "thresholds": {
+    "pass_rate": 0.85,
+    "route_accuracy": 0.85
+  }
+}
