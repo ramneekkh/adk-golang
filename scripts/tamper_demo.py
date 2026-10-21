@@ -10,9 +10,10 @@ Usage:
   scripts/tamper_demo.py card       # edit the card's echoed args (amount 500 -> 5000)
   scripts/tamper_demo.py honest     # approve unchanged, exactly like clicking Submit
 """
-import json, sys, urllib.request
+import json, os, sys, urllib.request
 
-BASE, APP, USER = "http://127.0.0.1:8080", "orchestrator", "demo-user"
+BASE = f"http://127.0.0.1:{os.getenv('VA_WEB_PORT', '8082' if '8082' in os.popen('lsof -i :8082 2>/dev/null').read() else '8080')}"
+APP, USER = "orchestrator", "demo-user"
 mode = sys.argv[1] if len(sys.argv) > 1 else "signed"
 
 

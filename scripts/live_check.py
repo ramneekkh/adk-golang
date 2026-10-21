@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Live end-to-end check against the running ADK Web server (same REST calls
 the UI makes). Prints the evidence a demo would point at."""
-import json, sys, urllib.request
+import json, os, sys, urllib.request
 
-BASE = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8080"
+_port = os.getenv("VA_WEB_PORT", "8082" if os.getenv("VA_WEB_PORT") else ("8082" if not os.getenv("VA_WEB_PORT") and os.path.exists("web.log") and "8082" in open("web.log").read() else "8080"))
+BASE = sys.argv[1] if len(sys.argv) > 1 else f"http://127.0.0.1:{os.getenv('VA_WEB_PORT', '8082' if '8082' in os.popen('lsof -i :8082 2>/dev/null').read() else '8080')}"
 APP, USER = "orchestrator", "demo-user"
 
 

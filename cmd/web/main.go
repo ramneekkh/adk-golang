@@ -56,9 +56,14 @@ func main() {
 		},
 	}
 
+	webPort := os.Getenv("VA_WEB_PORT")
+	if webPort == "" {
+		webPort = "8080"
+	}
+
 	args := []string{
 		"web",
-		"--port=8080",
+		"--port=" + webPort,
 		"webui",
 		"--api_server_address=/api",
 		"api",

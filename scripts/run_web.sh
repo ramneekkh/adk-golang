@@ -1,7 +1,15 @@
 #!/bin/bash
 set -eo pipefail
 
-fuser -k 8080/tcp 8081/tcp 8082/tcp 2>/dev/null || true
+if [ -z "${VA_WEB_PORT}" ]; then
+    if lsof -i :8080 >/dev/null 2>&1; then
+        export VA_WEB_PORT=8082
+    else
+        export VA_WEB_PORT=8080
+    fi
+fi
+
+fuser -k "${VA_WEB_PORT}/tcp" 8081/tcp 2>/dev/null || true
 pkill -f '[.]bin/gateway' || true
 pkill -f '[.]bin/web' || true
 pkill -f '[c]md/gateway' || true
@@ -20,7 +28,7 @@ echo "Starting LiteLLM-compatible gateway on port ${VA_GATEWAY_PORT}..."
 ./.bin/gateway > gateway.log 2>&1 &
 GATEWAY_PID=$!
 
-echo "Starting ADK web UI and agents on port 8080..."
+echo "Starting ADK web UI and agents on port ${VA_WEB_PORT}..."
 ./.bin/web > web.log 2>&1 &
 WEB_PID=$!
 
@@ -32,7 +40,7 @@ function cleanup {
 trap cleanup EXIT
 
 echo "Services running:"
-echo "  - ADK Web UI: http://rktop.c.googlers.com:8080/ui/"
+echo "  - ADK Web UI: http://rktop.c.googlers.com:${VA_WEB_PORT}/ui/"
 echo "  - Gateway:    http://127.0.0.1:${VA_GATEWAY_PORT}/v1"
 echo "Press Ctrl+C to stop."
 wait
