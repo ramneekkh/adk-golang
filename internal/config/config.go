@@ -19,7 +19,7 @@ func LoadGatewayConfig() GatewayConfig {
 
 	project := os.Getenv("VA_VERTEX_PROJECT")
 	if project == "" {
-		project = "elevate-data-508005"
+		project = "ozone-511309"
 	}
 
 	location := os.Getenv("VA_VERTEX_LOCATION")

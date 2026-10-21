@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Live end-to-end check against the running ADK Web server (same REST calls
 the UI makes). Prints the evidence a demo would point at."""
+import http.client
 import json, os, sys, urllib.request
 
 _port = os.getenv("VA_WEB_PORT", "8082" if os.getenv("VA_WEB_PORT") else ("8082" if not os.getenv("VA_WEB_PORT") and os.path.exists("web.log") and "8082" in open("web.log").read() else "8080"))
@@ -13,7 +14,10 @@ def call(method, path, body=None):
                                  data=json.dumps(body).encode() if body is not None else None,
                                  headers={"Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=180) as r:
-        return r.read().decode()
+        try:
+            return r.read().decode()
+        except http.client.IncompleteRead as e:
+            return e.partial.decode()
 
 
 def new_session():

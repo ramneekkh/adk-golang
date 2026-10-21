@@ -19,6 +19,7 @@ sleep 1
 export VA_GATEWAY_PORT=8081
 export VA_GATEWAY_URL="http://127.0.0.1:${VA_GATEWAY_PORT}/v1"
 export VA_MODEL="${VA_MODEL:-gemini-2.5-flash}"
+export VA_VERTEX_PROJECT="${VA_VERTEX_PROJECT:-ozone-511309}"
 
 mkdir -p .bin
 go build -o .bin/gateway ./cmd/gateway
